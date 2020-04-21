@@ -20,20 +20,36 @@ Conda instructions are provided in more detail, but you may also use `pip` and `
 To use `pip` to install TorchServe and the model archiver:
 
 ```
-pip install torchserve torch-model-archiver
+pip install sentencepiece torch torchtext torchvision
+pip install -f https://download.pytorch.org/whl/torch_stable.html torchserve torch-model-archiver
 ```
 
 ### Install with Conda
-_Ubuntu_
+_Ubuntu with GPU/CUDA support_
 
 1. Install Java 11
     ```bash
     sudo apt-get install openjdk-11-jdk
     ```
 1. Install Conda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
-1. Create an environment and install torchserve and torch-model-archiver
+1. Create an environment and install dependencies, plus `torchserve` and `torch-model-archiver`
     ```bash
-    conda create --name torchserve torchserve torch-model-archiver -c pytorch
+    conda create --name torchserve cudatoolkit=10.1 pytorch torchtext torchserve torchvision torch-model-archiver -c pytorch -c powerai
+    ```
+1. Activate the environment
+    ```bash
+    source activate torchserve
+    ```
+_Ubuntu (no GPUs)_
+
+1. Install Java 11
+    ```bash
+    sudo apt-get install openjdk-11-jdk
+    ```
+1. Install Conda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+1. Create an environment and install dependencies, plus `torchserve` and `torch-model-archiver`
+    ```bash
+    conda create --name torchserve pytorch torchtext torchserve torchvision torch-model-archiver -c pytorch -c powerai
     ```
 1. Activate the environment
     ```bash
@@ -48,9 +64,9 @@ _macOS_
     brew cask install adoptopenjdk11
     ```
 1. Install Conda (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
-1. Create an environment and install torchserve and torch-model-archiver
+1. Create an environment and install dependencies, plus `torchserve` and `torch-model-archiver`
     ```bash
-    conda create --name torchserve torchserve torch-model-archiver -c pytorch
+    conda create --name torchserve pytorch torchtext torchserve torchvision torch-model-archiver -c pytorch -c powerai
     ```
 1. Activate the environment
     ```bash
@@ -255,6 +271,6 @@ To run your TorchServe Docker image and start TorchServe inside the container wi
 
 We welcome all contributions!
 
-To learn more about how to contribute, see the contributor guide [here](https://github.com/pytorch/serve/blob/master/CONTRIBUTING.md). 
+To learn more about how to contribute, see the contributor guide [here](https://github.com/pytorch/serve/blob/master/CONTRIBUTING.md).
 
 To file a bug or request a feature, please file a GitHub issue. For filing pull requests, please use the template [here](https://github.com/pytorch/serve/blob/master/pull_request_template.md). Cheers!
